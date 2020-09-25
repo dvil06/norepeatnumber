@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Source : https://github.com/dvil06/norepeatnumber.git -->
+
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>No Repeat Number Generator</title>
+
+    <style>
+        body {
+            margin-top: 50px;
+        }
+
+        label {
+            margin-bottom: 30px;
+        }
+
+        .right {
+            float: right;
+
+        }
+
+        .number {
+            width: 60px;
+        }
+
+        .name {
+            width: 400px;
+        }
+
+        .small-width {
+            width: 50px;
+        }
+
+        .large-width {
+            width: 700px;
+        }
+    </style>
+
+</head>
+
+<script>
+    var count = 0;
+</script>
+
+<body>
+
+    <div class="container">
+        <h1 class="text-center">No Repeat Number Generator</h1>
+        <hr>
+        <div class="right">
+            <label for="max">Max</label>
+            <input type="number" placeholder="Enter max value" name="max" id="max">
+            <br><br>
+        </div>
+
+        <label for="namee">Name</label>
+        <input type="text" placeholder="Enter Name" name="namee" id="namee">
+        <br><br>
+        <label id="num">
+
+        </label>
+        <br><br>
+        <input type="button" value="Generate Number" onclick="generate()" id="generate">
+
+        <hr>
+
+        <table border="1" cellspacing="0" class="table table-striped">
+            <tr>
+                <th class="number">Number</th>
+                <th class="name">Name</th>
+            </tr>
+
+            <tbody id="data-table">
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- script -->
+    <script>
+        var namee = [],
+            num = [],
+            max,
+            ndom;
+
+        // This is function to generate the random number, then store it and the name to array 
+        function generate() {
+            max = document.getElementById("max").value;
+            namee.push(document.getElementById("namee").value);
+
+            // LOGIC RANDOM
+            do
+                ndom = Math.floor(Math.random() * max) + 1;
+
+            while (num.indexOf(ndom) !== -1);
+
+            num.push(ndom);
+            // END OF RANDOM
+
+            document.getElementById("num").innerHTML = "Your Number : " + num[count];
+
+            // Hide button if already max
+            if (count == (max - 1))
+                document.getElementById("generate").style.visibility = 'hidden';
+            showtable();
+            count++;
+
+        }
+
+        // This is function to show new data from random result
+        function showtable() {
+            var table = document.getElementById("data-table");
+            var row = `<tr>
+							<td><input type="number" class="small-width" value="${num[count]}"></td>
+							<td><input type="text" value="${namee[count]}" class="large-width"</td>
+							
+					  </tr>`
+            table.innerHTML += row
+        }
+    </script>
+    <!-- end of script -->
+
+</body>
+
+</html>
